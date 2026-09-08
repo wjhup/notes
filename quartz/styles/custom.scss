@@ -2,6 +2,14 @@
 
 // put your custom CSS here!
 
+// ===== 字体栈：西文用 Inter / JetBrains Mono（Google Fonts，体积小），
+// 中文交给本机已装的黑体，不拉取几 MB 的中文 Web 字体 =====
+:root {
+  --headerFont: "Inter", "HarmonyOS Sans SC", "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --bodyFont: "Inter", "HarmonyOS Sans SC", "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --codeFont: "JetBrains Mono", "Cascadia Code", "Cascadia Mono", ui-monospace, Menlo, monospace;
+}
+
 // ===== 搜索弹窗：纯色底只罩住搜索面板（非全屏），护眼不透底 =====
 // 外层全屏容器恢复默认的轻微模糊，不再铺纯色
 .search > .search-container {
