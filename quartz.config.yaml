@@ -238,8 +238,7 @@ plugins:
   - source: ./custom/site-footer
     enabled: true
     options:
-      links:
-        GitHub: https://github.com/wjhup
+      links: {}
     layout:
       position: footer
       priority: 50
