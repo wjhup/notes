@@ -40,3 +40,19 @@
 .search > .search-container > .search-space > .search-layout > .results-container {
   scroll-padding-top: 0.5rem;
 }
+
+// ===== 修复收起状态下「探索」「目录」标题被裁切 =====
+// 上游按英文行高定的收起高度（探索 1.2rem / 目录 1.4rem）太矮，
+// 中文字体行框更高，收起后标题文字被拦腰裁掉
+.explorer.collapsed {
+  flex-basis: 2.2rem;
+  min-height: 2.2rem;
+}
+
+.toc {
+  min-height: 2.2rem;
+}
+
+.toc:has(button.toc-header.collapsed) {
+  flex-basis: 2.2rem;
+}
