@@ -9,7 +9,23 @@
   background: rgba(243, 242, 240, 0.98); // 暖白纸感底色（浅色模式）
 }
 
-:root[saved-theme="dark"] .search > .search-container {
-  background: rgba(24, 24, 26, 0.98); // 深灰底色（暗色模式）
+.search > .search-container.active {
+  display: flex;
+  align-items: center; // 垂直居中
+  justify-content: center; // 水平居中
+}
+
+// 弹窗收窄并居中，不再铺满整屏
+.search > .search-container > .search-space {
+  width: min(680px, 92vw);
+  max-height: 78vh;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+@media all and not (min-width: 1200px) {
+  .search > .search-container > .search-space {
+    width: 92vw;
+  }
 }
 
