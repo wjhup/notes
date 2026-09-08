@@ -33,8 +33,13 @@ const Footer = ((opts) => {
   margin-bottom: 4rem;
   opacity: 0.7;
 }
+footer p {
+  margin: 0;
+}
+footer p + p {
+  margin-top: 0.15rem;
+}
 footer p.footer-disclaimer {
-  margin: 0.2rem 0 0;
   font-size: 0.85rem;
   opacity: 0.85;
 }
