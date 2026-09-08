@@ -10,47 +10,47 @@
   --codeFont: "JetBrains Mono", "Cascadia Code", "Cascadia Mono", ui-monospace, Menlo, monospace;
 }
 
-// ===== 配色：墨绿书斋 =====
+// ===== 配色：深墨科技 =====
 // 重要：static/resource-style-*.css（Obsidian 基础主题）会把 --light 重定义为
 // var(--background-primary)，把 quartz.config.yaml 里的 theme.colors 整个覆盖掉，
 // 导致改配色毫无效果。这里同时改写 Quartz 变量与 Obsidian 底层变量，并加 !important
 // 确保无论加载顺序如何都生效。
 :root {
   // Quartz 变量
-  --light: #f7f8f4 !important; // 页面主背景（暖米）
-  --lightgray: #eef1e8 !important; // 侧栏 / 卡片底
-  --gray: #a2ac96 !important;
-  --darkgray: #55604f !important; // 正文文字
-  --dark: #252b22 !important; // 标题
-  --secondary: #4a7a58 !important; // 链接 / 强调
-  --tertiary: #8a9a7b !important;
-  --highlight: rgba(74, 122, 88, 0.13) !important;
-  --textHighlight: #d5e6c888 !important;
+  --light: #f5f7f9 !important; // 页面主背景（冷灰白）
+  --lightgray: #dde3ea !important; // 边框 / 分隔线
+  --gray: #8b95a1 !important;
+  --darkgray: #48566b !important; // 正文文字
+  --dark: #1a2029 !important; // 标题
+  --secondary: #0b6bcb !important; // 链接 / 强调（亮蓝）
+  --tertiary: #0e8f9e !important;
+  --highlight: rgba(11, 107, 203, 0.1) !important;
+  --textHighlight: #b6e0ff88 !important;
 
   // Obsidian 底层变量（resource-style 真正读取的）
-  --color-base-00: #f7f8f4 !important;
-  --color-base-20: #eef1e8 !important;
-  --background-primary: #f7f8f4 !important;
-  --background-primary-alt: #f1f4ec !important;
-  --background-secondary: #eef1e8 !important;
+  --color-base-00: #f5f7f9 !important;
+  --color-base-20: #eaf0f6 !important;
+  --background-primary: #f5f7f9 !important;
+  --background-primary-alt: #eef2f6 !important;
+  --background-secondary: #eaf0f6 !important; // 侧栏
 }
 
 :root[saved-theme="dark"] {
-  --light: #151a16 !important;
-  --lightgray: #232b24 !important;
-  --gray: #6c7a6e !important;
-  --darkgray: #bfc9be !important;
-  --dark: #e8ede6 !important;
-  --secondary: #7fb394 !important;
-  --tertiary: #8a9a7b !important;
-  --highlight: rgba(127, 179, 148, 0.16) !important;
-  --textHighlight: #4f7a5c88 !important;
+  --light: #0b0f14 !important; // 近纯黑
+  --lightgray: #1d242e !important;
+  --gray: #5a6779 !important;
+  --darkgray: #b6c2d0 !important;
+  --dark: #e6edf3 !important;
+  --secondary: #58a6ff !important; // 亮蓝
+  --tertiary: #39d0d8 !important;
+  --highlight: rgba(88, 166, 255, 0.14) !important;
+  --textHighlight: #2ea04388 !important;
 
-  --color-base-00: #151a16 !important;
-  --color-base-20: #232b24 !important;
-  --background-primary: #151a16 !important;
-  --background-primary-alt: #1c231d !important;
-  --background-secondary: #1c231d !important;
+  --color-base-00: #0b0f14 !important;
+  --color-base-20: #161d26 !important;
+  --background-primary: #0b0f14 !important;
+  --background-primary-alt: #131a22 !important;
+  --background-secondary: #161d26 !important;
 }
 
 // ===== 搜索弹窗：纯色底只罩住搜索面板（非全屏），护眼不透底 =====
