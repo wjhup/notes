@@ -4,6 +4,10 @@
  * 密码保存在 Cloudflare Pages 后台的环境变量 SITE_PASSWORD 中（加密存储），
  * 不写在代码里、也不会进 GitHub 仓库。改密码只需后台改环境变量后重新部署。
  *
+ * 支持多个密码：在环境变量里用逗号/分号/换行隔开，例如
+ *   SITE_PASSWORD = 123456,abc888,friend2026
+ * 任意一个匹配即可进入，方便给不同人发不同密码、单独作废某一个。
+ *
  * 若未设置 SITE_PASSWORD 环境变量，站点将拒绝访问（fail closed）。
  */
 
@@ -14,6 +18,14 @@ async function sha256(text) {
   const data = new TextEncoder().encode(text)
   const digest = await crypto.subtle.digest("SHA-256", data)
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("")
+}
+
+// 支持一次配置多个密码：逗号 / 分号 / 换行分隔
+function parsePasswords(raw) {
+  return (raw || "")
+    .split(/[,;\n]/)
+    .map((s) => s.trim())
+    .filter(Boolean)
 }
 
 function readCookie(header, name) {
@@ -79,18 +91,19 @@ function loginPage(error) {
 export async function onRequest(context) {
   const { request, env } = context
   const url = new URL(request.url)
-  const password = env.SITE_PASSWORD
+  const passwords = parsePasswords(env.SITE_PASSWORD)
 
   // 未配置密码：拒绝访问，避免防护被静默跳过
-  if (!password) {
+  if (passwords.length === 0) {
     return new Response(
       "站点未配置 SITE_PASSWORD 环境变量，访问保护已生效但无法校验。请在 Cloudflare Pages 后台设置该变量。",
       { status: 500, headers: { "Content-Type": "text/plain; charset=utf-8" } },
     )
   }
 
-  const token = await sha256(password)
-  const isAuthed = readCookie(request.headers.get("Cookie"), COOKIE_NAME) === token
+  const tokens = new Set(await Promise.all(passwords.map(sha256)))
+  const cookieValue = readCookie(request.headers.get("Cookie"), COOKIE_NAME)
+  const isAuthed = cookieValue !== null && tokens.has(cookieValue)
 
   // 处理登录提交
   if (url.searchParams.get("__login") === "1" && request.method === "POST") {
@@ -98,10 +111,11 @@ export async function onRequest(context) {
       return next(url, context)
     }
     const form = await request.formData()
-    const input = form.get("password") || ""
-    if (input === password) {
+    const input = (form.get("password") || "").trim()
+    if (passwords.includes(input)) {
       const target = new URL(request.url)
       target.searchParams.delete("__login")
+      const token = await sha256(input)
       return new Response(null, {
         status: 303,
         headers: {
