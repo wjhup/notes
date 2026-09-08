@@ -473,7 +473,17 @@ export async function installPlugin(
       console.log(styleText("cyan", `→`), `Linking ${spec.name} from ${spec.repo}...`)
     }
 
-    fs.symlinkSync(spec.repo, pluginDir, "dir")
+    // Windows: "dir" symlinks require admin/developer-mode; junctions do not
+    try {
+      fs.symlinkSync(spec.repo, pluginDir, "dir")
+    } catch (err) {
+      const code = (err as NodeJS.ErrnoException).code
+      if (process.platform === "win32" && (code === "EPERM" || code === "EACCES")) {
+        fs.symlinkSync(spec.repo, pluginDir, "junction")
+      } else {
+        throw err
+      }
+    }
 
     if (options.verbose) {
       console.log(styleText("green", `✓`), `Linked ${spec.name}`)

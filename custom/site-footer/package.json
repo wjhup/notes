@@ -1,0 +1,39 @@
+{
+  "name": "site-footer",
+  "version": "1.0.0",
+  "description": "Custom footer for wjhup.com",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./components/index.js",
+    "./components": "./components/index.js",
+    "./package.json": "./package.json"
+  },
+  "quartz": {
+    "name": "site-footer",
+    "displayName": "Site Footer",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "dependencies": [],
+    "defaultOrder": 50,
+    "defaultEnabled": true,
+    "defaultOptions": {
+      "links": {
+        "GitHub": "https://github.com/wjhup"
+      }
+    },
+    "components": {
+      "Footer": {
+        "displayName": "Footer",
+        "defaultPosition": "footer",
+        "defaultPriority": 50
+      }
+    },
+    "optionSchema": {
+      "links": {
+        "type": "object"
+      }
+    }
+  }
+}
