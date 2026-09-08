@@ -19,3 +19,24 @@
 :root[saved-theme="dark"] .search > .search-container > .search-space {
   background: rgba(24, 24, 26, 0.98); // 深灰底色（暗色模式）
 }
+
+// ===== 搜索结果定位与滚动条 =====
+// 结果卡片与输入框之间留出间距，滚动条不再贴到输入框底部
+.search > .search-container > .search-space > .search-layout {
+  margin-top: 0.6rem;
+}
+
+// 关键修复：预览容器必须定位，否则插件用 offsetParent 累加 offsetTop 时
+// 会一路算到页面顶部（虚高几百像素），导致命中内容被滚出视野
+.search > .search-container > .search-space > .search-layout > .preview-container {
+  position: relative;
+}
+
+// 命中高亮默认停在预览区顶部往下约两行处，不贴顶、不被遮挡
+.search > .search-container > .search-space .highlight {
+  scroll-margin-top: 3rem;
+}
+
+.search > .search-container > .search-space > .search-layout > .results-container {
+  scroll-padding-top: 0.5rem;
+}
