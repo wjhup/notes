@@ -2,13 +2,20 @@
 
 // put your custom CSS here!
 
-// ===== 搜索弹窗：纯色遮罩，护眼不透底 =====
-// 默认遮罩只有 4px 模糊、无底色，底下页面内容会透出来
+// ===== 搜索弹窗：纯色底只罩住搜索面板（非全屏），护眼不透底 =====
+// 外层全屏容器恢复默认的轻微模糊，不再铺纯色
 .search > .search-container {
-  backdrop-filter: none;
-  background: rgba(243, 242, 240, 0.98); // 暖白纸感底色（浅色模式）
+  background: transparent;
 }
 
-:root[saved-theme="dark"] .search > .search-container {
+// 纯色护眼底色只作用于搜索面板本身（输入框 + 结果区那一块）
+.search > .search-container > .search-space {
+  background: rgba(243, 242, 240, 0.98); // 暖白纸感（浅色模式）
+  border-radius: 7px;
+  padding: 0.5em 1em 1em;
+  box-shadow: 0 14px 50px rgba(27, 33, 48, 0.12), 0 10px 30px rgba(27, 33, 48, 0.16);
+}
+
+:root[saved-theme="dark"] .search > .search-container > .search-space {
   background: rgba(24, 24, 26, 0.98); // 深灰底色（暗色模式）
 }
