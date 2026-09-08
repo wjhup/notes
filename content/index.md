@@ -1,6 +1,6 @@
 ---
-title: Welcome to WJHUP
+title: Welcome to wjhup
 ---
 
-This is a blank Quartz installation.
-See the [wjhup](https://wjhup.com) for how to get started.
+在这里，记录工作实践与学习思考，沉淀可复用的知识与文档。 
+本站所有内容仅作个人存档，不构成专业意见。
