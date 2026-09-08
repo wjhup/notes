@@ -1,3 +1,15 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+// ===== 搜索弹窗：纯色遮罩，护眼不透底 =====
+// 默认遮罩只有 4px 模糊、无底色，底下页面内容会透出来
+.search > .search-container {
+  backdrop-filter: none;
+  background: rgba(243, 242, 240, 0.98); // 暖白纸感底色（浅色模式）
+}
+
+:root[saved-theme="dark"] .search > .search-container {
+  background: rgba(24, 24, 26, 0.98); // 深灰底色（暗色模式）
+}
+
